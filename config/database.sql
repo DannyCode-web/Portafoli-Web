@@ -5,11 +5,9 @@
 -- ============================================
 
 -- Crear y seleccionar la base de datos
-CREATE DATABASE IF NOT EXISTS portafolio_web
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE IF NOT EXISTS portafolio_web_phrasebare
 
-USE portafolio_web;
+USE portafolio_web_phrasebare;
 
 -- ============================================
 -- TABLA: usuario (administrador del sistema)
