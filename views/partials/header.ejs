@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || 'Sistemas Web Studio' %></title>
+  <meta name="description" content="Desarrollador de Sistemas y Páginas Web | Soluciones digitales para empresas" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">
+      <span class="logo-icon"><i class="fas fa-code"></i></span>
+      <span class="logo-text">Sistemas<strong>Web</strong>Studio</span>
+    </a>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="/"           class="nav-link <%= (currentPage==='inicio')     ? 'active' : '' %>">Inicio</a>
+      <a href="/sobre-mi"   class="nav-link <%= (currentPage==='sobre-mi')   ? 'active' : '' %>">Sobre Mí</a>
+      <a href="/habilidades"class="nav-link <%= (currentPage==='habilidades')? 'active' : '' %>">Habilidades</a>
+      <a href="/proyectos"  class="nav-link <%= (currentPage==='proyectos')  ? 'active' : '' %>">Proyectos</a>
+      <a href="/servicios"  class="nav-link <%= (currentPage==='servicios')  ? 'active' : '' %>">Servicios</a>
+      <a href="/contacto"   class="nav-link nav-cta <%= (currentPage==='contacto') ? 'active' : '' %>">Contacto</a>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main class="main-content">

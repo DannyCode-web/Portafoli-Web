@@ -1,0 +1,63 @@
+<%
+  activeMenu = 'proyectos';
+%>
+<%- include('../layout-header') %>
+
+<div class="page-heading">
+  <h2>Proyectos</h2>
+  <a href="/admin/proyectos/nuevo" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo proyecto</a>
+</div>
+
+<% if (success) { %><div class="alert alert-success"><i class="fas fa-check-circle"></i> <%= success %></div><% } %>
+<% if (error) { %><div class="alert alert-danger"><i class="fas fa-circle-exclamation"></i> <%= error %></div><% } %>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Imagen</th>
+        <th>Título</th>
+        <th>Categoría</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (proyectos.length > 0) { %>
+        <% proyectos.forEach(p => { %>
+        <tr>
+          <td><%= p.id %></td>
+          <td>
+            <% if (p.imagen) { %>
+              <img src="<%= p.imagen %>" class="img-preview" alt="" />
+            <% } else { %>
+              <span style="color:#9CA3AF; font-size:0.8rem;">Sin imagen</span>
+            <% } %>
+          </td>
+          <td><strong><%= p.titulo %></strong></td>
+          <td><%= p.categoria %></td>
+          <td>
+            <span style="font-size:0.75rem; font-weight:600; padding:3px 10px; border-radius:100px;
+              background:<%= p.activo ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)' %>;
+              color:<%= p.activo ? '#166534' : '#991B1B' %>;">
+              <%= p.activo ? 'Activo' : 'Inactivo' %>
+            </span>
+          </td>
+          <td>
+            <a href="/admin/proyectos/editar/<%= p.id %>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+            <form action="/admin/proyectos/eliminar/<%= p.id %>" method="POST" style="display:inline;"
+                  onsubmit="return confirm('¿Eliminar este proyecto?')">
+              <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      <% } else { %>
+        <tr><td colspan="6" style="text-align:center; padding:2rem; color:#9CA3AF;">Sin proyectos aún.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../layout-footer') %>

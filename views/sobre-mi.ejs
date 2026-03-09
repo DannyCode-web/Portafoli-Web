@@ -1,0 +1,43 @@
+<%
+  currentPage = 'sobre-mi';
+%>
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Sobre <span class="text-gradient">Mí</span></h1>
+    <p class="page-subtitle">Conoce mi historia y mi pasión por el desarrollo web</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-img-wrapper">
+           <img src="/img/yo.jpeg" alt="Mi foto" style="width:340px; height:380px; object-fit:cover; border-radius:20px;" />          <div class="about-badge-float"><i class="fas fa-code"></i> Dev</div>
+        </div>
+      </div>
+      <div class="about-content animate-on-scroll">
+        <span class="section-tag">Mi historia</span>
+        <h2>Apasionado por crear soluciones digitales</h2>
+        <p>Soy un desarrollador web especializado en construir aplicaciones y sistemas web robustos para empresas. Con más de 5 años de experiencia, combino el poder de Node.js y MySQL para entregar soluciones de alto rendimiento.</p>
+        <p>Me especializo en entender las necesidades del negocio y traducirlas en software funcional, escalable y fácil de usar. Cada proyecto es una oportunidad de crear algo que genere valor real.</p>
+
+        <div class="about-highlights">
+          <div class="highlight-item"><i class="fas fa-check-circle"></i> Arquitectura MVC con Node.js & Express</div>
+          <div class="highlight-item"><i class="fas fa-check-circle"></i> Bases de datos MySQL optimizadas</div>
+          <div class="highlight-item"><i class="fas fa-check-circle"></i> Diseño responsive y moderno</div>
+          <div class="highlight-item"><i class="fas fa-check-circle"></i> Paneles administrativos completos</div>
+        </div>
+
+        <div class="about-actions">
+          <a href="/contacto" class="btn btn-primary">Trabajemos juntos</a>
+          <a href="/proyectos" class="btn btn-outline">Ver mi trabajo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

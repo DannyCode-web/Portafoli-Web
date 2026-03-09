@@ -1,0 +1,59 @@
+<%
+  activeMenu = 'dashboard';
+%>
+<%- include('layout-header') %>
+
+<div class="page-heading">
+  <h2>Dashboard</h2>
+  <a href="/" target="_blank" class="btn btn-back"><i class="fas fa-globe"></i> Ver sitio</a>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-card-icon blue"><i class="fas fa-folder-open"></i></div>
+    <div>
+      <div class="stat-card-num"><%= totalProyectos %></div>
+      <div class="stat-card-label">Proyectos</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-icon green"><i class="fas fa-cogs"></i></div>
+    <div>
+      <div class="stat-card-num"><%= totalServicios %></div>
+      <div class="stat-card-label">Servicios</div>
+    </div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-icon red"><i class="fas fa-envelope"></i></div>
+    <div>
+      <div class="stat-card-num"><%= mensajesNuevos %></div>
+      <div class="stat-card-label">Mensajes nuevos</div>
+    </div>
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;">
+  <div class="table-wrapper">
+    <div class="table-header">
+      <h3>Acciones rápidas</h3>
+    </div>
+    <div style="padding:1.5rem; display:flex; flex-direction:column; gap:0.75rem;">
+      <a href="/admin/proyectos/nuevo" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo proyecto</a>
+      <a href="/admin/servicios/nuevo" class="btn btn-success"><i class="fas fa-plus"></i> Nuevo servicio</a>
+      <a href="/admin/mensajes"        class="btn btn-warning"><i class="fas fa-envelope"></i> Ver mensajes</a>
+    </div>
+  </div>
+  <div class="table-wrapper">
+    <div class="table-header">
+      <h3>Información del sistema</h3>
+    </div>
+    <div style="padding:1.5rem; font-size:0.85rem; display:flex; flex-direction:column; gap:0.6rem; color:#475569;">
+      <div><i class="fas fa-server" style="width:18px; color:#0EA5E9;"></i> Node.js + Express</div>
+      <div><i class="fas fa-database" style="width:18px; color:#0EA5E9;"></i> MySQL (portafolio_web)</div>
+      <div><i class="fas fa-paint-brush" style="width:18px; color:#0EA5E9;"></i> Motor de vistas: EJS</div>
+      <div><i class="fas fa-code" style="width:18px; color:#22C55E;"></i> Estado: <span style="color:#166534; font-weight:600;">Activo</span></div>
+    </div>
+  </div>
+</div>
+
+<%- include('layout-footer') %>

@@ -1,0 +1,56 @@
+<%
+  activeMenu = 'servicios';
+%>
+<%- include('../layout-header') %>
+
+<div class="page-heading">
+  <h2><%= servicio ? 'Editar Servicio' : 'Nuevo Servicio' %></h2>
+  <a href="/admin/servicios" class="btn btn-back"><i class="fas fa-arrow-left"></i> Volver</a>
+</div>
+
+<div class="admin-form">
+  <form action="<%= accion %>" method="POST">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Título *</label>
+        <input type="text" name="titulo" value="<%= servicio ? servicio.titulo : '' %>" required />
+      </div>
+      <div class="form-group">
+        <label>Ícono (Font Awesome class)</label>
+        <input type="text" name="icono" value="<%= servicio ? servicio.icono : 'fas fa-laptop-code' %>" placeholder="fas fa-laptop-code" />
+      </div>
+      <div class="form-group form-full">
+        <label>Descripción *</label>
+        <textarea name="descripcion" rows="4" required><%= servicio ? servicio.descripcion : '' %></textarea>
+      </div>
+      <div class="form-group">
+        <label>Precio (opcional)</label>
+        <input type="number" name="precio" step="0.01" value="<%= servicio && servicio.precio ? servicio.precio : '' %>" placeholder="0.00" />
+      </div>
+      <div class="form-group">
+        <label>Orden</label>
+        <input type="number" name="orden" value="<%= servicio ? servicio.orden : 0 %>" min="0" />
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="destacado" value="1" <%= (servicio && servicio.destacado) ? 'checked' : '' %> />
+          Marcar como destacado
+        </label>
+      </div>
+      <% if (servicio) { %>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="activo" value="1" <%= servicio.activo ? 'checked' : '' %> />
+          Servicio activo
+        </label>
+      </div>
+      <% } %>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+      <a href="/admin/servicios" class="btn btn-back">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../layout-footer') %>

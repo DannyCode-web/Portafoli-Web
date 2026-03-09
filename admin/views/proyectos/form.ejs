@@ -1,0 +1,75 @@
+<%
+  activeMenu = 'proyectos';
+%>
+<%- include('../layout-header') %>
+
+<div class="page-heading">
+  <h2><%= proyecto ? 'Editar Proyecto' : 'Nuevo Proyecto' %></h2>
+  <a href="/admin/proyectos" class="btn btn-back"><i class="fas fa-arrow-left"></i> Volver</a>
+</div>
+
+<div class="admin-form">
+  <form action="<%= accion %>" method="POST" enctype="multipart/form-data">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Título *</label>
+        <input type="text" name="titulo" value="<%= proyecto ? proyecto.titulo : '' %>" required placeholder="Nombre del proyecto" />
+      </div>
+      <div class="form-group">
+        <label>Categoría</label>
+        <select name="categoria">
+          <% ['Web', 'Sistemas', 'Móvil', 'E-commerce', 'Otro'].forEach(c => { %>
+            <option value="<%= c %>" <%= (proyecto && proyecto.categoria === c) ? 'selected' : '' %>><%= c %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group form-full">
+        <label>Descripción *</label>
+        <textarea name="descripcion" rows="4" required placeholder="Descripción del proyecto..."><%= proyecto ? proyecto.descripcion : '' %></textarea>
+      </div>
+      <div class="form-group form-full">
+        <label>Tecnologías (separadas por coma)</label>
+        <input type="text" name="tecnologias" value="<%= proyecto ? proyecto.tecnologias : '' %>" placeholder="Node.js, MySQL, Bootstrap..." />
+      </div>
+      <div class="form-group">
+        <label>URL Demo</label>
+        <input type="url" name="url_demo" value="<%= proyecto ? proyecto.url_demo || '' : '' %>" placeholder="https://..." />
+      </div>
+      <div class="form-group">
+        <label>URL Repositorio</label>
+        <input type="url" name="url_repo" value="<%= proyecto ? proyecto.url_repo || '' : '' %>" placeholder="https://github.com/..." />
+      </div>
+      <div class="form-group">
+        <label>Imagen del proyecto</label>
+        <input type="file" name="imagen" accept="image/*" />
+        <% if (proyecto && proyecto.imagen) { %>
+          <img src="<%= proyecto.imagen %>" class="img-preview" style="margin-top:8px;" />
+        <% } %>
+      </div>
+      <div class="form-group">
+        <label>Orden</label>
+        <input type="number" name="orden" value="<%= proyecto ? proyecto.orden : 0 %>" min="0" />
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="destacado" value="1" <%= (proyecto && proyecto.destacado) ? 'checked' : '' %> />
+          Marcar como destacado
+        </label>
+      </div>
+      <% if (proyecto) { %>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" name="activo" value="1" <%= proyecto.activo ? 'checked' : '' %> />
+          Proyecto activo
+        </label>
+      </div>
+      <% } %>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+      <a href="/admin/proyectos" class="btn btn-back">Cancelar</a>
+    </div>
+  </form>
+</div>
+
+<%- include('../layout-footer') %>

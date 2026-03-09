@@ -1,0 +1,73 @@
+<%
+  activeMenu = 'habilidades';
+%>
+<%- include('layout-header') %>
+
+<div class="page-heading">
+  <h2>Habilidades</h2>
+</div>
+
+<% if (success) { %><div class="alert alert-success"><i class="fas fa-check-circle"></i> <%= success %></div><% } %>
+<% if (error) { %><div class="alert alert-danger"><i class="fas fa-circle-exclamation"></i> <%= error %></div><% } %>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; align-items:start;">
+
+  <!-- Lista -->
+  <div class="table-wrapper">
+    <div class="table-header"><h3>Lista de habilidades</h3></div>
+    <table>
+      <thead><tr><th>Nombre</th><th>Cat.</th><th>%</th><th>Acc.</th></tr></thead>
+      <tbody>
+        <% habilidades.forEach(h => { %>
+        <tr>
+          <td><i class="<%= h.icono %>" style="margin-right:6px; color:#0EA5E9;"></i><%= h.nombre %></td>
+          <td><%= h.categoria %></td>
+          <td><strong><%= h.porcentaje %>%</strong></td>
+          <td>
+            <form action="/admin/habilidades/eliminar/<%= h.id %>" method="POST" style="display:inline;"
+                  onsubmit="return confirm('¿Eliminar?')">
+              <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario -->
+  <div class="admin-form">
+    <h3 style="margin-bottom:1.25rem; font-size:1rem;">Agregar habilidad</h3>
+    <form action="/admin/habilidades/nuevo" method="POST">
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Nombre *</label>
+        <input type="text" name="nombre" required placeholder="Node.js" />
+      </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Categoría</label>
+        <select name="categoria">
+          <option value="Frontend">Frontend</option>
+          <option value="Backend">Backend</option>
+          <option value="Base Datos">Base de Datos</option>
+          <option value="DevOps">DevOps</option>
+          <option value="General">General</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Porcentaje (0-100)</label>
+        <input type="number" name="porcentaje" min="0" max="100" value="80" required />
+      </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Ícono Font Awesome</label>
+        <input type="text" name="icono" value="fas fa-code" placeholder="fab fa-node-js" />
+      </div>
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label>Orden</label>
+        <input type="number" name="orden" value="0" />
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+    </form>
+  </div>
+</div>
+
+<%- include('layout-footer') %>

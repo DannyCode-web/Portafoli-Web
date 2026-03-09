@@ -1,0 +1,47 @@
+<%
+  activeMenu = 'mensajes';
+%>
+<%- include('../layout-header') %>
+
+<div class="page-heading">
+  <h2>Mensajes de contacto</h2>
+</div>
+
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr><th>#</th><th>Nombre</th><th>Email</th><th>Asunto</th><th>Fecha</th><th>Leído</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      <% if (mensajes.length > 0) { %>
+        <% mensajes.forEach(m => { %>
+        <tr style="<%= !m.leido ? 'font-weight:600;' : '' %>">
+          <td><%= m.id %></td>
+          <td><%= m.nombre %></td>
+          <td><%= m.email %></td>
+          <td><%= m.asunto %></td>
+          <td style="font-size:0.82rem; color:#64748B;"><%= new Date(m.creado_en).toLocaleDateString('es') %></td>
+          <td>
+            <span style="font-size:0.72rem; padding:2px 8px; border-radius:100px; font-weight:600;
+              background:<%= m.leido ? 'rgba(34,197,94,0.1)' : 'rgba(245,158,11,0.1)' %>;
+              color:<%= m.leido ? '#166534' : '#92400E' %>;">
+              <%= m.leido ? 'Leído' : 'Nuevo' %>
+            </span>
+          </td>
+          <td>
+            <a href="/admin/mensajes/<%= m.id %>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+            <form action="/admin/mensajes/eliminar/<%= m.id %>" method="POST" style="display:inline;"
+                  onsubmit="return confirm('¿Eliminar este mensaje?')">
+              <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      <% } else { %>
+        <tr><td colspan="7" style="text-align:center; padding:2rem; color:#9CA3AF;">No hay mensajes aún.</td></tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../layout-footer') %>

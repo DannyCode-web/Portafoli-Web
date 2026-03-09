@@ -1,0 +1,61 @@
+<%
+  currentPage = 'proyectos';
+%>
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Mis <span class="text-gradient">Proyectos</span></h1>
+    <p class="page-subtitle">Trabajos realizados para clientes y proyectos propios</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <!-- Filtros por categoría -->
+    <% if (categorias.length > 1) { %>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <% categorias.forEach(cat => { %>
+        <button class="filter-btn" data-filter="<%= cat %>"><%= cat %></button>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <div class="projects-grid" id="projectsGrid">
+      <% if (proyectos.length > 0) { %>
+        <% proyectos.forEach(p => { %>
+        <article class="project-card animate-on-scroll" data-cat="<%= p.categoria %>">
+          <div class="project-image">
+            <% if (p.imagen) { %>
+              <img src="<%= p.imagen %>" alt="<%= p.titulo %>" loading="lazy" />
+            <% } else { %>
+              <div class="project-placeholder"><i class="fas fa-laptop-code"></i></div>
+            <% } %>
+            <div class="project-overlay">
+              <a href="/proyectos/<%= p.id %>" class="btn btn-sm btn-light">Detalles</a>
+              <% if (p.url_demo) { %><a href="<%= p.url_demo %>" target="_blank" class="btn btn-sm btn-primary">Demo</a><% } %>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat"><%= p.categoria %></span>
+            <h3 class="project-title"><%= p.titulo %></h3>
+            <p class="project-desc"><%= p.descripcion.substring(0, 120) %>...</p>
+            <% if (p.tecnologias) { %>
+            <div class="project-techs">
+              <% p.tecnologias.split(',').slice(0,4).forEach(t => { %>
+                <span class="tech-badge"><%= t.trim() %></span>
+              <% }) %>
+            </div>
+            <% } %>
+          </div>
+        </article>
+        <% }) %>
+      <% } else { %>
+        <p class="no-data">Proyectos próximamente...</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,139 @@
+<%
+  currentPage = 'inicio';
+%>
+<%- include('partials/header') %>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-circle-dot"></i> Disponible para proyectos</div>
+    <h1 class="hero-title">
+      Desarrollador de<br>
+      <span class="text-gradient">Sistemas y Páginas Web</span>
+    </h1>
+    <p class="hero-subtitle">
+      Soluciones digitales para empresas — desde sitios web corporativos hasta sistemas de gestión a medida.
+    </p>
+    <div class="hero-actions">
+      <a href="/proyectos" class="btn btn-primary"><i class="fas fa-folder-open"></i> Ver Proyectos</a>
+      <a href="/contacto"  class="btn btn-outline"><i class="fas fa-paper-plane"></i> Contáctame</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Proyectos</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Años exp.</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Satisfacción</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="code-card">
+      <div class="code-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="code-filename">app.js</span>
+      </div>
+      <pre class="code-body"><code><span class="c-kw">const</span> <span class="c-var">express</span> = <span class="c-fn">require</span>(<span class="c-str">'express'</span>);
+<span class="c-kw">const</span> <span class="c-var">app</span> = <span class="c-fn">express</span>();
+
+app.<span class="c-fn">get</span>(<span class="c-str">'/'</span>, (req, res) => {
+  res.<span class="c-fn">send</span>({
+    <span class="c-prop">dev</span>: <span class="c-str">'Sistemas Web Studio'</span>,
+    <span class="c-prop">status</span>: <span class="c-str">'✅ En línea'</span>,
+    <span class="c-prop">tech</span>: [<span class="c-str">'Node.js'</span>, <span class="c-str">'MySQL'</span>]
+  });
+});
+
+app.<span class="c-fn">listen</span>(<span class="c-num">3000</span>);</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROYECTOS DESTACADOS ===== -->
+<section class="section" id="proyectos-home">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Portafolio</span>
+      <h2 class="section-title">Proyectos Destacados</h2>
+      <p class="section-desc">Una selección de trabajos recientes</p>
+    </div>
+
+    <div class="projects-grid">
+      <% if (proyectos && proyectos.length > 0) { %>
+        <% proyectos.forEach(p => { %>
+        <article class="project-card animate-on-scroll">
+          <div class="project-image">
+            <% if (p.imagen) { %>
+              <img src="<%= p.imagen %>" alt="<%= p.titulo %>" loading="lazy" />
+            <% } else { %>
+              <div class="project-placeholder"><i class="fas fa-laptop-code"></i></div>
+            <% } %>
+            <div class="project-overlay">
+              <a href="/proyectos/<%= p.id %>" class="btn btn-sm btn-light">Ver más</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-cat"><%= p.categoria %></span>
+            <h3 class="project-title"><%= p.titulo %></h3>
+            <p class="project-desc"><%= p.descripcion.substring(0, 100) %>...</p>
+            <% if (p.tecnologias) { %>
+            <div class="project-techs">
+              <% p.tecnologias.split(',').forEach(t => { %>
+                <span class="tech-badge"><%= t.trim() %></span>
+              <% }) %>
+            </div>
+            <% } %>
+          </div>
+        </article>
+        <% }) %>
+      <% } else { %>
+        <p class="no-data">Proyectos próximamente...</p>
+      <% } %>
+    </div>
+
+    <div class="section-cta">
+      <a href="/proyectos" class="btn btn-outline">Ver todos los proyectos <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICIOS ===== -->
+<section class="section section-dark" id="servicios-home">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">¿Qué ofrezco?</span>
+      <h2 class="section-title">Mis Servicios</h2>
+    </div>
+    <div class="services-grid">
+      <% if (servicios && servicios.length > 0) { %>
+        <% servicios.slice(0,3).forEach(s => { %>
+        <div class="service-card animate-on-scroll">
+          <div class="service-icon"><i class="<%= s.icono %>"></i></div>
+          <h3><%= s.titulo %></h3>
+          <p><%= s.descripcion %></p>
+        </div>
+        <% }) %>
+      <% } %>
+    </div>
+    <div class="section-cta">
+      <a href="/servicios" class="btn btn-primary">Ver todos los servicios</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>¿Listo para comenzar tu proyecto?</h2>
+      <p>Contáctame hoy y recibe una propuesta sin costo.</p>
+      <a href="/contacto" class="btn btn-primary btn-lg">Iniciar proyecto <i class="fas fa-rocket"></i></a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

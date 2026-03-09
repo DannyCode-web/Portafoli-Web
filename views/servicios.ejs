@@ -1,0 +1,37 @@
+<%
+  currentPage = 'servicios';
+%>
+<%- include('partials/header') %>
+
+<section class="page-hero">
+  <div class="container">
+    <h1 class="page-title">Mis <span class="text-gradient">Servicios</span></h1>
+    <p class="page-subtitle">Soluciones web profesionales para hacer crecer tu negocio</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="services-full-grid">
+      <% if (servicios.length > 0) { %>
+        <% servicios.forEach(s => { %>
+        <div class="service-full-card animate-on-scroll">
+          <div class="service-icon-lg"><i class="<%= s.icono %>"></i></div>
+          <div class="service-body">
+            <h3><%= s.titulo %></h3>
+            <p><%= s.descripcion %></p>
+            <% if (s.precio) { %>
+              <div class="service-price">Desde $<%= parseFloat(s.precio).toLocaleString() %></div>
+            <% } %>
+            <a href="/contacto?servicio=<%= encodeURIComponent(s.titulo) %>" class="btn btn-sm btn-primary">Solicitar</a>
+          </div>
+        </div>
+        <% }) %>
+      <% } else { %>
+        <p class="no-data">Servicios próximamente...</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

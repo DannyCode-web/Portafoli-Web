@@ -1,0 +1,49 @@
+<%
+  activeMenu = 'mensajes';
+%>
+<%- include('../layout-header') %>
+
+<div class="page-heading">
+  <h2>Mensaje #<%= mensaje.id %></h2>
+  <a href="/admin/mensajes" class="btn btn-back"><i class="fas fa-arrow-left"></i> Volver</a>
+</div>
+
+<div class="msg-detail">
+  <div class="msg-meta">
+    <div class="msg-meta-item">
+      <label>Nombre</label>
+      <span><%= mensaje.nombre %></span>
+    </div>
+    <div class="msg-meta-item">
+      <label>Email</label>
+      <span><a href="mailto:<%= mensaje.email %>"><%= mensaje.email %></a></span>
+    </div>
+    <div class="msg-meta-item">
+      <label>Teléfono</label>
+      <span><%= mensaje.telefono || '—' %></span>
+    </div>
+    <div class="msg-meta-item">
+      <label>Fecha</label>
+      <span><%= new Date(mensaje.creado_en).toLocaleString('es') %></span>
+    </div>
+    <div class="msg-meta-item">
+      <label>Asunto</label>
+      <span><%= mensaje.asunto %></span>
+    </div>
+  </div>
+
+  <label style="font-size:0.78rem; font-weight:600; color:#64748B; display:block; margin-bottom:8px;">Mensaje</label>
+  <div class="msg-body"><%= mensaje.mensaje %></div>
+
+  <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
+    <a href="mailto:<%= mensaje.email %>?subject=Re: <%= mensaje.asunto %>" class="btn btn-primary">
+      <i class="fas fa-reply"></i> Responder por email
+    </a>
+    <form action="/admin/mensajes/eliminar/<%= mensaje.id %>" method="POST"
+          onsubmit="return confirm('¿Eliminar este mensaje?')">
+      <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+    </form>
+  </div>
+</div>
+
+<%- include('../layout-footer') %>
